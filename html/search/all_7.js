@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['max17048_5fi2caddr_5fdefault',['MAX17048_I2CADDR_DEFAULT',['../_adafruit___m_a_x1704_x_8h.html#ad05bcc50b0849a0ef942f460bdc16cfe',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5falertflag_5freset_5findicator',['MAX1704X_ALERTFLAG_RESET_INDICATOR',['../_adafruit___m_a_x1704_x_8h.html#ab262d991e26d84179c102e218c68448d',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5falertflag_5fsoc_5fchange',['MAX1704X_ALERTFLAG_SOC_CHANGE',['../_adafruit___m_a_x1704_x_8h.html#a9650f1dc2abc0e91baa812b71a5816c5',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5falertflag_5fsoc_5flow',['MAX1704X_ALERTFLAG_SOC_LOW',['../_adafruit___m_a_x1704_x_8h.html#a8915378b5baedce2645ed10942871c09',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5falertflag_5fvoltage_5fhigh',['MAX1704X_ALERTFLAG_VOLTAGE_HIGH',['../_adafruit___m_a_x1704_x_8h.html#ad5665b77280466a4a9b96045acf4d2ff',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5falertflag_5fvoltage_5flow',['MAX1704X_ALERTFLAG_VOLTAGE_LOW',['../_adafruit___m_a_x1704_x_8h.html#aa0d5a97ff196016a4ae4109caf95278b',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5falertflag_5fvoltage_5freset',['MAX1704X_ALERTFLAG_VOLTAGE_RESET',['../_adafruit___m_a_x1704_x_8h.html#a8a489f5d356a2a98393d12d35ae0dc92',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5fchipid_5freg',['MAX1704X_CHIPID_REG',['../_adafruit___m_a_x1704_x_8h.html#a62e83fe6cdff1521618efda739ae5323',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5fcmd_5freg',['MAX1704X_CMD_REG',['../_adafruit___m_a_x1704_x_8h.html#aee0d2a8e9879a6c26933f16950fe54f8',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5fconfig_5freg',['MAX1704X_CONFIG_REG',['../_adafruit___m_a_x1704_x_8h.html#aa025063289ecc9105fb88eb89f82c2df',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5fcrate_5freg',['MAX1704X_CRATE_REG',['../_adafruit___m_a_x1704_x_8h.html#a7e19996d017a91a6d08c0a2381f5038f',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5fhibrt_5freg',['MAX1704X_HIBRT_REG',['../_adafruit___m_a_x1704_x_8h.html#ad9f7a5bb05613b42ae248aa072dc0ce7',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5fmode_5freg',['MAX1704X_MODE_REG',['../_adafruit___m_a_x1704_x_8h.html#a5f8c03da27a3060aca3ac39015688210',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5fsoc_5freg',['MAX1704X_SOC_REG',['../_adafruit___m_a_x1704_x_8h.html#a4909ca2ffa593ecee54bddd056aa4f34',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5fstatus_5freg',['MAX1704X_STATUS_REG',['../_adafruit___m_a_x1704_x_8h.html#ac044034e07f18c5768782ab73963d345',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5fvalert_5freg',['MAX1704X_VALERT_REG',['../_adafruit___m_a_x1704_x_8h.html#a1811f5b5146eddc6f20b0c58d5b064bd',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5fvcell_5freg',['MAX1704X_VCELL_REG',['../_adafruit___m_a_x1704_x_8h.html#a14aa51fd5207038ec202904c3e416850',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5fversion_5freg',['MAX1704X_VERSION_REG',['../_adafruit___m_a_x1704_x_8h.html#a855ad066dfd5cb6175aaeb446037540e',1,'Adafruit_MAX1704X.h']]],
+  ['max1704x_5fvreset_5freg',['MAX1704X_VRESET_REG',['../_adafruit___m_a_x1704_x_8h.html#a6926fdb21aa8ab882fb8a426e68ef080',1,'Adafruit_MAX1704X.h']]]
+];
