@@ -6,7 +6,7 @@ void setup() {
   Serial.begin(115200);
   while (!Serial) delay(10);    // wait until serial monitor opens
 
-  Serial.println(F("\nAdafruit MAX17048 demo"));
+  Serial.println(F("\nAdafruit MAX17048 advanced demo"));
 
   if (!maxlipo.begin()) {
     Serial.println(F("Couldnt find Adafruit MAX17048?\nMake sure a battery is plugged in!"));
