@@ -6,7 +6,7 @@ void setup() {
   Serial.begin(115200);
   while (!Serial) delay(10);    // wait until serial monitor opens
 
-  Serial.println("\nAdafruit MAX17048 demo");
+  Serial.println(F("\nAdafruit MAX17048 demo"));
 
   if (!maxlipo.begin()) {
     Serial.println(F("Couldnt find Adafruit MAX17048?\nMake sure a battery is plugged in!"));
@@ -25,7 +25,9 @@ void setup() {
   // The reset voltage is what the chip considers 'battery has been removed and replaced'
   // The default is 3.0 Volts but you can change it here: 
   //maxlipo.setResetVoltage(2.5);
-  Serial.print(F("Reset voltage =")); Serial.print(maxlipo.getResetVoltage()); Serial.println(" V");
+  Serial.print(F("Reset voltage = ")); 
+  Serial.print(maxlipo.getResetVoltage());
+  Serial.println(" V");
 
   // Hibernation mode reduces how often the ADC is read, for power reduction. There is an automatic
   // enter/exit mode but you can also customize the activity threshold both as voltage and charge rate
@@ -33,12 +35,12 @@ void setup() {
   //maxlipo.setActivityThreshold(0.15);
   Serial.print(F("Activity threshold = ")); 
   Serial.print(maxlipo.getActivityThreshold()); 
-  Serial.println("V");
+  Serial.println(" V change");
 
   //maxlipo.setHibernationThreshold(5);
   Serial.print(F("Hibernation threshold = "));
   Serial.print(maxlipo.getHibernationThreshold()); 
-  Serial.println("%");
+  Serial.println(" %/hour");
 
   // You can also 'force' hibernation mode!
   // maxlipo.hibernate();
@@ -52,10 +54,8 @@ void setup() {
   float alert_min, alert_max;
   maxlipo.getAlertVoltages(alert_min, alert_max);
   Serial.print("Alert voltages: "); 
-  Serial.print(alert_min); Serial.print(" - "); 
+  Serial.print(alert_min); Serial.print(" ~ "); 
   Serial.print(alert_max); Serial.println(" V");
-
-
 }
 
 void loop() {
