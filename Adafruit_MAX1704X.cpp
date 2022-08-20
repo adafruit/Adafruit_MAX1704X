@@ -201,8 +201,8 @@ void Adafruit_MAX17048::setAlertVoltages(float minv, float maxv) {
   Adafruit_BusIO_Register valert_max_reg =
       Adafruit_BusIO_Register(i2c_dev, MAX1704X_VALERT_REG + 1);
 
-  uint8_t minv_int = min(255, max(0, minv / 0.02));
-  uint8_t maxv_int = min(255, max(0, maxv / 0.02));
+  uint8_t minv_int = min(255, max(0, (int)(minv / 0.02)));
+  uint8_t maxv_int = min(255, max(0, (int)(maxv / 0.02)));
   valert_min_reg.write(minv_int);
   valert_max_reg.write(maxv_int);
 }
@@ -268,7 +268,7 @@ float Adafruit_MAX17048::getActivityThreshold(void) {
 void Adafruit_MAX17048::setActivityThreshold(float actthresh) {
   Adafruit_BusIO_Register actthr_reg =
       Adafruit_BusIO_Register(i2c_dev, MAX1704X_HIBRT_REG + 1);
-  actthr_reg.write(min(255, max(0, actthresh / 0.00125))); // 1.25mV per LSB
+  actthr_reg.write(min(255, max(0, (int)(actthresh / 0.00125)))); // 1.25mV per LSB
 }
 
 /*!
@@ -294,7 +294,7 @@ float Adafruit_MAX17048::getHibernationThreshold(void) {
 void Adafruit_MAX17048::setHibernationThreshold(float hibthresh) {
   Adafruit_BusIO_Register hibthr_reg =
       Adafruit_BusIO_Register(i2c_dev, MAX1704X_HIBRT_REG);
-  hibthr_reg.write(min(255, max(0, hibthresh / 0.208))); // 0.208% per hour
+  hibthr_reg.write(min(255, max(0, (int)(hibthresh / 0.208)))); // 0.208% per hour
 }
 
 /*!
