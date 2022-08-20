@@ -1,42 +1,106 @@
-#include "Adafruit_LC709203F.h"
+#include "Adafruit_MAX1704X.h"
 
-Adafruit_LC709203F lc;
+Adafruit_MAX17048 maxlipo;
 
 void setup() {
   Serial.begin(115200);
   delay(10);
-  Serial.println("\nAdafruit LC709203F demo");
+  Serial.println("\nAdafruit MAX17048 demo");
 
-  // For the Feather ESP32-S2, we need to enable I2C power first!
-  // this section can be deleted for other boards
-#if defined(ARDUINO_ADAFRUIT_FEATHER_ESP32S2)
-  // turn on the I2C power by setting pin to opposite of 'rest state'
-  pinMode(PIN_I2C_POWER, INPUT);
-  delay(1);
-  bool polarity = digitalRead(PIN_I2C_POWER);
-  pinMode(PIN_I2C_POWER, OUTPUT);
-  digitalWrite(PIN_I2C_POWER, !polarity);
-#endif
-
-  if (!lc.begin()) {
-    Serial.println(F("Couldnt find Adafruit LC709203F?\nMake sure a battery is plugged in!"));
+  if (!maxlipo.begin()) {
+    Serial.println(F("Couldnt find Adafruit MAX17048?\nMake sure a battery is plugged in!"));
     while (1) delay(10);
   }
-  Serial.println(F("Found LC709203F"));
-  Serial.print("Version: 0x"); Serial.println(lc.getICversion(), HEX);
+  Serial.print(F("Found MAX17048"));
+  Serial.print(F(" with Chip ID: 0x")); 
+  Serial.println(maxlipo.getChipID(), HEX);
 
-  lc.setThermistorB(3950);
-  Serial.print("Thermistor B = "); Serial.println(lc.getThermistorB());
+  // Quick starting allows an instant 'auto-calibration' of the battery. However, its a bad idea
+  // to do this right when the battery is first plugged in or if there's a lot of load on the battery
+  // so uncomment only if you're sure you want to 'reset' the chips charge calculator.
+  // Serial.println("Quick starting");
+  // maxlipo.quickStart();
+  
+  // The reset voltage is what the chip considers 'battery has been removed and replaced'
+  // The default is 3.0 Volts but you can change it here: 
+  //maxlipo.setResetVoltage(2.5);
+  Serial.print(F("Reset voltage =")); Serial.print(maxlipo.getResetVoltage()); Serial.println(" V");
 
-  lc.setPackSize(LC709203F_APA_500MAH);
+  // Hibernation mode reduces how often the ADC is read, for power reduction. There is an automatic
+  // enter/exit mode but you can also customize the activity threshold both as voltage and charge rate
 
-  lc.setAlarmVoltage(3.8);
+  //maxlipo.setActivityThreshold(0.15);
+  Serial.print(F("Activity threshold = ")); 
+  Serial.print(maxlipo.getActivityThreshold()); 
+  Serial.println("V");
+
+  //maxlipo.setHibernationThreshold(5);
+  Serial.print(F("Hibernation threshold = "));
+  Serial.print(maxlipo.getHibernationThreshold()); 
+  Serial.println("%");
+
+  // You can also 'force' hibernation mode!
+  // maxlipo.hibernate();
+  // ...or force it to wake up!
+  // maxlipo.wake();
+
+  // The alert pin can be used to detect when the voltage of the battery goes below or
+  // above a voltage, you can also query the alert in the loop.
+  maxlipo.setAlertVoltages(2.0, 4.2);
+
+  float alert_min, alert_max;
+  maxlipo.getAlertVoltages(alert_min, alert_max);
+  Serial.print("Alert voltages: "); 
+  Serial.print(alert_min); Serial.print(" - "); 
+  Serial.print(alert_max); Serial.println(" V");
+
+
 }
 
 void loop() {
-  Serial.print("Batt Voltage: "); Serial.println(lc.cellVoltage(), 3);
-  Serial.print("Batt Percent: "); Serial.println(lc.cellPercent(), 1);
-  Serial.print("Batt Temp: "); Serial.println(lc.getCellTemperature(), 1);
+  Serial.print(F("Batt Voltage: ")); Serial.print(maxlipo.cellVoltage(), 3); Serial.println(" V");
+  Serial.print(F("Batt Percent: ")); Serial.print(maxlipo.cellPercent(), 1); Serial.println(" %");
+  Serial.print(F("(Dis)Charge rate : ")); Serial.print(maxlipo.chargeRate(), 1); Serial.println(" %/hr");
+
+  // we can check if we're hibernating or not
+  if (maxlipo.isHibernating()) {
+    Serial.println(F("Hibernating!"));
+  }
+
+
+  if (maxlipo.isActiveAlert()) {
+    uint8_t status_flags = maxlipo.getAlertStatus();
+    Serial.print(F("ALERT! flags = 0x"));
+    Serial.print(status_flags, HEX);
+    
+    if (status_flags & MAX1704X_ALERTFLAG_SOC_CHANGE) {
+      Serial.print(", SOC Change");
+      maxlipo.clearAlertFlag(MAX1704X_ALERTFLAG_SOC_CHANGE); // clear the alert
+    }
+    if (status_flags & MAX1704X_ALERTFLAG_SOC_LOW) {
+      Serial.print(", SOC Low");
+      maxlipo.clearAlertFlag(MAX1704X_ALERTFLAG_SOC_LOW); // clear the alert
+    }
+    if (status_flags & MAX1704X_ALERTFLAG_VOLTAGE_RESET) {
+      Serial.print(", Voltage reset");
+      maxlipo.clearAlertFlag(MAX1704X_ALERTFLAG_VOLTAGE_RESET); // clear the alert
+    }
+    if (status_flags & MAX1704X_ALERTFLAG_VOLTAGE_LOW) {
+      Serial.print(", Voltage low");
+      maxlipo.clearAlertFlag(MAX1704X_ALERTFLAG_VOLTAGE_LOW); // clear the alert
+    }
+    if (status_flags & MAX1704X_ALERTFLAG_VOLTAGE_HIGH) {
+      Serial.print(", Voltage high");
+      maxlipo.clearAlertFlag(MAX1704X_ALERTFLAG_VOLTAGE_HIGH); // clear the alert
+    }
+    if (status_flags & MAX1704X_ALERTFLAG_RESET_INDICATOR) {
+      Serial.print(", Reset Indicator");
+      maxlipo.clearAlertFlag(MAX1704X_ALERTFLAG_RESET_INDICATOR); // clear the alert
+    }
+    Serial.println();
+  }
+  Serial.println();
+  Serial.println();
 
   delay(2000);  // dont query too often!
 }
