@@ -95,6 +95,10 @@ uint8_t Adafruit_MAX17048::getChipID(void) {
   return ic_vers.read();
 }
 
+/*!
+ *    @brief  Soft reset the MAX1704x
+ *    @return True on reset success
+ */
 bool Adafruit_MAX17048::reset(void) {
   Adafruit_BusIO_Register cmd =
       Adafruit_BusIO_Register(i2c_dev, MAX1704X_CMD_REG, 2, MSBFIRST);
