@@ -99,13 +99,14 @@ bool Adafruit_MAX17048::reset(void) {
   Adafruit_BusIO_Register cmd =
       Adafruit_BusIO_Register(i2c_dev, MAX1704X_CMD_REG, 2, MSBFIRST);
 
-  // the actual reset, this should *fail*
+  // send reset command, the MAX1704 will reset before ACKing, 
+  // so I2C xfer is expected to *fail* with a NACK
   if (cmd.write(0x5400)) {
     return false;
   }
 
   // loop and attempt to clear alert until success
-  for (uint8_t retries=0; retries<3; retries++) {
+  for (uint8_t retries = 0; retries < 3; retries++) {
     if (clearAlertFlag(MAX1704X_ALERTFLAG_RESET_INDICATOR)) {
       return true;
     }
