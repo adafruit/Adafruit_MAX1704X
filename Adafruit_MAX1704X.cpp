@@ -114,7 +114,6 @@ bool Adafruit_MAX17048::reset(void) {
     if (clearAlertFlag(MAX1704X_ALERTFLAG_RESET_INDICATOR)) {
       return true;
     }
-    // add retry delay?
   }
 
   // something didn't work :(
