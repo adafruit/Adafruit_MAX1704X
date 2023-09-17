@@ -102,12 +102,23 @@ uint8_t Adafruit_MAX17048::getChipID(void) {
 bool Adafruit_MAX17048::reset(void) {
   Adafruit_BusIO_Register cmd =
       Adafruit_BusIO_Register(i2c_dev, MAX1704X_CMD_REG, 2, MSBFIRST);
-  if (cmd.write(0x5400)) {
-    return false; // This should *fail*
-  }
-  // aha! we NACKed, which is CORRECT!
 
-  return clearAlertFlag(MAX1704X_ALERTFLAG_RESET_INDICATOR);
+  // send reset command, the MAX1704 will reset before ACKing,
+  // so I2C xfer is expected to *fail* with a NACK
+  if (cmd.write(0x5400)) {
+    return false;
+  }
+
+  // loop and attempt to clear alert until success
+  for (uint8_t retries = 0; retries < 3; retries++) {
+    if (clearAlertFlag(MAX1704X_ALERTFLAG_RESET_INDICATOR)) {
+      return true;
+    }
+    // add retry delay?
+  }
+
+  // something didn't work :(
+  return false;
 }
 
 /*!
