@@ -59,7 +59,7 @@ bool Adafruit_MAX17048::begin(TwoWire *wire) {
     return false;
   }
 
-  if ((getICversion() & 0xFFF0) != 0x0010) { // couldnt find the chip?
+  if (!isDeviceReady()) { // couldnt find the chip - check battery!
     return false;
   }
 
@@ -93,6 +93,15 @@ uint8_t Adafruit_MAX17048::getChipID(void) {
   Adafruit_BusIO_Register ic_vers =
       Adafruit_BusIO_Register(i2c_dev, MAX1704X_CHIPID_REG);
   return ic_vers.read();
+}
+
+/*!
+ *    @brief  Check if the MAX1704x is ready to be read from.
+ *    Chip ID = 0xFF and Version = 0xFFFF if no battery is attached
+ *    @return True if the MAX1704x is ready to be read from
+ */
+bool Adafruit_MAX17048::isDeviceReady(void) {
+  return (getICversion() & 0xFFF0) == 0x0010;
 }
 
 /*!
@@ -137,6 +146,8 @@ bool Adafruit_MAX17048::clearAlertFlag(uint8_t flags) {
  *    @return Floating point value read in Volts
  */
 float Adafruit_MAX17048::cellVoltage(void) {
+  if (!isDeviceReady())
+    return NAN;
   Adafruit_BusIO_Register vcell =
       Adafruit_BusIO_Register(i2c_dev, MAX1704X_VCELL_REG, 2, MSBFIRST);
   float voltage = vcell.read();
@@ -148,6 +159,8 @@ float Adafruit_MAX17048::cellVoltage(void) {
  *    @return Floating point value from 0 to 100.0
  */
 float Adafruit_MAX17048::cellPercent(void) {
+  if (!isDeviceReady())
+    return NAN;
   Adafruit_BusIO_Register vperc =
       Adafruit_BusIO_Register(i2c_dev, MAX1704X_SOC_REG, 2, MSBFIRST);
 
@@ -160,6 +173,8 @@ float Adafruit_MAX17048::cellPercent(void) {
  *    @return Floating point value from 0 to 100.0% per hour
  */
 float Adafruit_MAX17048::chargeRate(void) {
+  if (!isDeviceReady())
+    return NAN;
   Adafruit_BusIO_Register crate =
       Adafruit_BusIO_Register(i2c_dev, MAX1704X_CRATE_REG, 2, MSBFIRST);
 
