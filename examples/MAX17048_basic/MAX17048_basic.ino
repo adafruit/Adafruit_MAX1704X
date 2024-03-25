@@ -8,9 +8,9 @@ void setup() {
 
   Serial.println(F("\nAdafruit MAX17048 simple demo"));
 
-  if (!maxlipo.begin()) {
+  while (!maxlipo.begin()) {
     Serial.println(F("Couldnt find Adafruit MAX17048?\nMake sure a battery is plugged in!"));
-    while (1) delay(10);
+    delay(2000);
   }
   Serial.print(F("Found MAX17048"));
   Serial.print(F(" with Chip ID: 0x")); 
@@ -18,7 +18,13 @@ void setup() {
 }
 
 void loop() {
-  Serial.print(F("Batt Voltage: ")); Serial.print(maxlipo.cellVoltage(), 3); Serial.println(" V");
+  float cellVoltage = maxlipo.cellVoltage();
+  if (isnan(cellVoltage)) {
+    Serial.println("Failed to read cell voltage, check battery is connected!");
+    delay(2000);
+    return;
+  }
+  Serial.print(F("Batt Voltage: ")); Serial.print(cellVoltage, 3); Serial.println(" V");
   Serial.print(F("Batt Percent: ")); Serial.print(maxlipo.cellPercent(), 1); Serial.println(" %");
   Serial.println();
 
