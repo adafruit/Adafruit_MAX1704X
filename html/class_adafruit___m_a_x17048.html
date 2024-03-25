@@ -81,6 +81,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aded7d87829bd3320be23d62257b9f908"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_a_x17048.html#aded7d87829bd3320be23d62257b9f908">begin</a> (TwoWire *wire=&amp;Wire)</td></tr>
 <tr class="memdesc:aded7d87829bd3320be23d62257b9f908"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the hardware and initializes I2C.  <a href="#aded7d87829bd3320be23d62257b9f908">More...</a><br /></td></tr>
 <tr class="separator:aded7d87829bd3320be23d62257b9f908"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76a73e7784b05b0e6f4e683e401b627a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_a_x17048.html#a76a73e7784b05b0e6f4e683e401b627a">isDeviceReady</a> (void)</td></tr>
+<tr class="memdesc:a76a73e7784b05b0e6f4e683e401b627a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the MAX1704x is ready to be read from. Chip ID = 0xFF and Version = 0xFFFF if no battery is attached.  <a href="#a76a73e7784b05b0e6f4e683e401b627a">More...</a><br /></td></tr>
+<tr class="separator:a76a73e7784b05b0e6f4e683e401b627a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab75cdf97417ebab9900fe52358add73a"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_adafruit___m_a_x17048.html#ab75cdf97417ebab9900fe52358add73a">getICversion</a> (void)</td></tr>
 <tr class="memdesc:ab75cdf97417ebab9900fe52358add73a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get IC LSI version.  <a href="#ab75cdf97417ebab9900fe52358add73a">More...</a><br /></td></tr>
 <tr class="separator:ab75cdf97417ebab9900fe52358add73a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,6 +195,27 @@ Adafruit_BusIO_Register *&#160;</td><td class="memItemRight" valign="bottom"><a 
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if initialization was successful, otherwise false. </dd></dl>
+
+</div>
+</div>
+<a id="a76a73e7784b05b0e6f4e683e401b627a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76a73e7784b05b0e6f4e683e401b627a">&#9670;&nbsp;</a></span>isDeviceReady()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Adafruit_MAX17048::isDeviceReady </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if the MAX1704x is ready to be read from. Chip ID = 0xFF and Version = 0xFFFF if no battery is attached. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the MAX1704x is ready to be read from </dd></dl>
 
 </div>
 </div>
