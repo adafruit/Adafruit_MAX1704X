@@ -1,7 +1,7 @@
 Adafruit_MAX1704X [![Build Status](https://github.com/adafruit/Adafruit_MAX1704X/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit_MAX1704X/actions)[![Documentation](https://github.com/adafruit/ci-arduino/blob/master/assets/doxygen_badge.svg)](http://adafruit.github.io/Adafruit_MAX1704X/html/index.html)
 ================
 
-<a href="https://www.adafruit.com/product/1120"><img src="assets/board.jpg?raw=true" width="500px"></a>
+<a href="https://www.adafruit.com/product/5580"><img src="https://cdn-shop.adafruit.com/970x728/5580-00.jpg" width="500px"></a>
 
 # Adafruit MAX1704X Lipo Monitor / Fuel Gauge Library
 This library is for the Adafruit MAX17048 or MAX17049 Breakouts
